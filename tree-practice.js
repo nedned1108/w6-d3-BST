@@ -5,7 +5,22 @@ const { BinarySearchTree, TreeNode } = require('./binary-search-tree.js');
 // Practice problems on binary trees
 
 function findMinBST (rootNode) {
-  // Your code here
+  if (!rootNode) return;
+
+  let min = rootNode.val;
+  const queue = [rootNode];
+  while (queue.length) {
+    let currentNode = queue.shift();
+    if (currentNode.val < min && !currentNode.left) {
+      min = currentNode.val;
+    } else if (currentNode.left) {
+      queue.push(currentNode.left)
+    } else if (currentNode.right) {
+      queue.push(currentNode.right)
+    }
+
+  }
+  return min;
 }
 
 function findMaxBST (rootNode) {

@@ -85,7 +85,7 @@ function getHeight (rootNode) {
   //     let node = queue.shift();
   //     if (node.left) {
   //       queue.push(node.left)
-  //     } 
+  //     }
   //     if (node.right) {
   //       queue.push(node.right)
   //     }
@@ -93,17 +93,46 @@ function getHeight (rootNode) {
   //   height++;
   // }
   // return height;
-  
+
   // RECURSIVE
   if(!rootNode) return -1;
   if(!rootNode.left && !rootNode.right) return 0;
   return 1 + Math.max(getHeight(rootNode.left), getHeight(rootNode.right));
-  
+
 }
 
 function balancedTree (rootNode) {
+  //let current = rootNode
+  const queue = [rootNode]
+if (!rootNode) return true
+  while (queue.length){
+    let node = queue.shift()
+    let left = getHeight(node.left)
+    let right = getHeight(node.right)
+    if (Math.abs(left-right) > 1) return false
+  //   else{
+  //   return false
+  // }
+  if (node.left){
+    queue.push(node.left)
+  }
+ if (node.right){
+    queue.push(node.right)
+  }
+  }
+  return true
+//   while (current){
+//   if (!rootNode.left && !rootNode.right){
+//     return false
+//   }
+//   let left = getHeight(current.left)
+//   current = current.left
+//   let right = getHeight(current.right)
+//   current = current.right
 
-}
+
+// }
+ }
 
 function countNodes (rootNode) {
   let queue = [rootNode]
@@ -113,7 +142,8 @@ function countNodes (rootNode) {
     count++;
     if (node.left) {
       queue.push(node.left);
-    } else if (node.right) {
+    }
+    if (node.right) {
       queue.push(node.right);
     }
   }
